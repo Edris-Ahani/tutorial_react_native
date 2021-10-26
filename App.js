@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { StyleSheet, Text, View, FlatList } from 'react-native'
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, TouchableHighlight } from 'react-native'
 
 export default function App() {
 
@@ -17,35 +17,39 @@ export default function App() {
     {id: 11, fullname: "Edris Ahani"}
   ]);
 
+  const deleteMaster = (id) => {
+    /*console.log(id);
+    const filtered = masters.filter(master => master.id != id);
+    setMasters(filtered);*/
+
+    /*setMasters((prevState) =>{
+      return prevState.filter(m => m.id != id);
+    });*/
+
+    setMasters((prevState) => prevState.filter(m => m.id != id));
+  }
+
   return (
       <View style={styles.container}>
 
-        {/*first way*/}
-        {/*<FlatList data={masters} renderItem={(data)=>(
-            <Text style={styles.text}>{data.item.id}: {data.item.fullname}</Text>
-        )}/>*/}
-
-        {/*second way*/}
-        <FlatList
+        {/*<FlatList
             keyExtractor={item => item.id.toString()}
-            horizontal={true}
-            /*numColumns={3}*/
             data={masters}
             renderItem={({item: master})=>(
-            <Text style={styles.text}>{master.id}: {master.fullname}</Text>
+            <TouchableOpacity onPress={() => { deleteMaster(master.id) }}>
+              <Text style={styles.text}>{master.id}: {master.fullname}</Text>
+            </TouchableOpacity>
+        )}/>*/}
+
+        <FlatList
+            keyExtractor={item => item.id.toString()}
+            data={masters}
+            renderItem={({item: master})=>(
+            <TouchableHighlight onPress={() => { deleteMaster(master.id) }}>
+              <Text style={styles.text}>{master.id}: {master.fullname}</Text>
+            </TouchableHighlight>
         )}/>
 
-        {/*<ScrollView style={styles.scrollView}>
-          {
-            masters.map((master, index) => {
-              return(
-                  <View key={master.id}>
-                    <Text style={styles.text}>{index}:  {master.fullname}</Text>
-                  </View>
-              )
-            })
-          }
-        </ScrollView>*/}
       </View>
   )
 }
