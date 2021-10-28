@@ -49,7 +49,7 @@ export default function App() {
   }
 
   return (
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           {/*Header*/}
           <Header/>
